@@ -6,9 +6,6 @@ import { useGetContactsQuery } from 'services/contactsAPI';
 
 import ContactTable from 'components/contactList/CuntactTable';
 
-// import { ContactListItem } from '../contactListItem/ContactListItem';
-// import { List } from './ContactList.styled';
-
 const ContactList = () => {
   const filter = useSelector(selectors.getFilter);
   const { data: contacts, error } = useGetContactsQuery();
