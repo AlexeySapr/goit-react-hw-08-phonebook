@@ -1,5 +1,4 @@
-import { contData } from 'customData/data';
-
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import Box from '@mui/material/Box';
@@ -10,8 +9,6 @@ import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
 import ContactTableHead from './ContactTableHead';
 import ContactTableRow from './ContactTableRow';
-
-const rows = contData;
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -29,7 +26,7 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-export default function CustCuntactList() {
+const ContactTable = ({ contacts }) => {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('name');
   const [page, setPage] = useState(0);
@@ -70,11 +67,11 @@ export default function CustCuntactList() {
             />
 
             <TableBody>
-              {[...rows]
+              {contacts
                 .sort(getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(row => (
-                  <ContactTableRow key={row.id} {...row} />
+                .map(contact => (
+                  <ContactTableRow key={contact.id} {...contact} />
                 ))}
             </TableBody>
           </Table>
@@ -83,7 +80,7 @@ export default function CustCuntactList() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={contacts.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
@@ -92,4 +89,10 @@ export default function CustCuntactList() {
       </Paper>
     </Box>
   );
-}
+};
+
+ContactTable.propTypes = {
+  contacts: PropTypes.array.isRequired,
+};
+
+export default ContactTable;

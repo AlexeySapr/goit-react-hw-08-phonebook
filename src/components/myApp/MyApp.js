@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Header from 'components/header/Header';
 import ContactForm from 'components/contactForm/ContactForm';
-import CustCuntactList from 'components/contactList/CustCuntactList';
+import ContactList from 'components/contactList/ContactList';
 
 const MyApp = () => {
   return (
@@ -20,7 +20,7 @@ const MyApp = () => {
           </Grid>
           <Grid item xs={12} sm={7} md={8}>
             <Item>
-              <CustCuntactList />
+              <ContactList />
             </Item>
           </Grid>
         </Grid>

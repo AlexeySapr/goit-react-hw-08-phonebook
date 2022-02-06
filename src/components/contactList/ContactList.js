@@ -4,8 +4,10 @@ import toast, { Toaster } from 'react-hot-toast';
 import { selectors } from 'redux/phonebook';
 import { useGetContactsQuery } from 'services/contactsAPI';
 
-import { ContactListItem } from '../contactListItem/ContactListItem';
-import { List } from './ContactList.styled';
+import ContactTable from 'components/contactList/CuntactTable';
+
+// import { ContactListItem } from '../contactListItem/ContactListItem';
+// import { List } from './ContactList.styled';
 
 const ContactList = () => {
   const filter = useSelector(selectors.getFilter);
@@ -29,13 +31,7 @@ const ContactList = () => {
   return (
     <>
       {error && <Toaster />}
-      {!error && contacts && (
-        <List>
-          {filteredContacts.map(contact => (
-            <ContactListItem key={contact.id} {...contact} />
-          ))}
-        </List>
-      )}
+      {!error && contacts && <ContactTable contacts={filteredContacts} />}
     </>
   );
 };
