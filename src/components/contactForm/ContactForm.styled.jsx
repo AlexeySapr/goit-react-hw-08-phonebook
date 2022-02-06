@@ -1,9 +1,8 @@
 import styled from '@emotion/styled';
 
 export const FormContacts = styled.form`
-  border: ${props => `2px solid ${props.theme.colors.primary}`};
   padding: 30px;
-  width: 500px;
+  background-color: rgba(247, 230, 230, 50%);
 `;
 
 export const InputLabel = styled.label`

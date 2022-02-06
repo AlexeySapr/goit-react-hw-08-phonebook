@@ -1,7 +1,7 @@
 import { createContext, useState, useMemo } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import Switch from '@mui/material/Switch';
+// import Switch from '@mui/material/Switch';
 import { getTheme } from 'constants/theme';
 
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
@@ -26,10 +26,10 @@ const ToggleThemeMode = ({ children }) => {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Switch
+        {/* <Switch
           onChange={colorMode.toggleColorMode}
           inputProps={{ 'aria-label': 'controlled' }}
-        />
+        /> */}
         {children}
       </ThemeProvider>
     </ColorModeContext.Provider>

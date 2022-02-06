@@ -1,18 +1,24 @@
-import PropTypes from 'prop-types';
-import { Title } from './Header.styled';
+import { HeadContainer, Title, TitleWrapper } from './Header.styled';
+import Switch from '@mui/material/Switch';
 
-const Header = ({ title, children }) => {
+import { FcContacts } from 'react-icons/fc';
+
+const Header = () => {
   return (
-    <>
-      <Title>{title}</Title>
-      {children}
-    </>
-  );
-};
+    <HeadContainer>
+      <TitleWrapper>
+        <Title variant="h5">
+          Phonebook
+          <FcContacts />
+        </Title>
 
-Header.propTypes = {
-  title: PropTypes.string,
-  children: PropTypes.node,
+        <Switch
+          // onChange={colorMode.toggleColorMode}
+          inputProps={{ 'aria-label': 'controlled' }}
+        />
+      </TitleWrapper>
+    </HeadContainer>
+  );
 };
 
 export default Header;

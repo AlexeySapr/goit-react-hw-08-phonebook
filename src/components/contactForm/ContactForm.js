@@ -5,40 +5,24 @@ import {
   useAddContactMutation,
 } from 'services/contactsAPI';
 
-import {
-  FormContacts,
-  InputLabel,
-  FormInput,
-  FormButton,
-} from './ContactForm.styled';
+import { FormContacts, FormButton } from './ContactForm.styled';
+
+import TextField from '@mui/material/TextField';
+import PhoneMaskCustom from 'components/myApp/PhoneMaskCustom';
+
+const initState = { name: '', number: '' };
 
 const ContactForm = () => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [formValues, setFormValues] = useState(() => initState);
 
   const { data: contacts, error: contactsError } = useGetContactsQuery();
   const [addContact, { isLoading }] = useAddContactMutation();
 
-  const handleNameChange = event => {
-    const { name, value } = event.currentTarget;
-
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-
-      case 'number':
-        setNumber(value);
-        break;
-
-      default:
-        break;
-    }
-  };
-
-  const ressetForm = () => {
-    setName('');
-    setNumber('');
+  const handleChange = event => {
+    setFormValues({
+      ...formValues,
+      [event.target.name]: event.target.value,
+    });
   };
 
   const isInContacts = ({ name, number }) => {
@@ -54,51 +38,57 @@ const ContactForm = () => {
   const onSubmit = event => {
     event.preventDefault();
 
-    if (contactsError) {
-      toast.error(`Server not responding`);
-      return;
-    }
+    // if (contactsError) {
+    //   toast.error(`Server not responding`);
+    //   return;
+    // }
 
-    if (isInContacts({ name, number })) {
-      toast.error('This contact already exists', {
-        duration: 3000,
-        position: 'top-center',
-      });
-      return;
-    }
+    // if (isInContacts({ name, number })) {
+    //   toast.error('This contact already exists', {
+    //     duration: 3000,
+    //     position: 'top-center',
+    //   });
+    //   return;
+    // }
 
-    addContact({ name, phone: number });
-    toast.success(`Contact ${name} successfully added`);
-    ressetForm();
+    // addContact({ name, phone: number });
+    // toast.success(`Contact ${name} successfully added`);
+    // ressetForm();
+    setFormValues(initState);
   };
 
   return (
     <FormContacts onSubmit={onSubmit}>
-      <InputLabel>
-        Name
-        <FormInput
-          type="text"
-          name="name"
-          value={name}
-          onChange={handleNameChange}
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-        />
-      </InputLabel>
+      <TextField
+        id="standard-basic"
+        label="Name"
+        name="name"
+        value={formValues.name}
+        onChange={handleChange}
+        inputProps={{
+          inputMode: 'text',
+          pattern: "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$",
+          title: 'Name may contain only letters, apostrophe, dash and spaces.',
+        }}
+        variant="standard"
+        fullWidth
+        required
+      />
       <Toaster />
-      <InputLabel>
-        Number
-        <FormInput
-          type="tel"
-          name="number"
-          value={number}
-          onChange={handleNameChange}
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-        />
-      </InputLabel>
+      <TextField
+        id="standard-basic"
+        label="Phone"
+        name="number"
+        value={formValues.number}
+        onChange={handleChange}
+        InputProps={{
+          inputMode: 'tel',
+          inputComponent: PhoneMaskCustom,
+        }}
+        variant="standard"
+        fullWidth
+        required
+      />
       <FormButton type="submit" disabled={isLoading}>
         {isLoading ? 'Adding...' : 'Add contact'}
       </FormButton>
