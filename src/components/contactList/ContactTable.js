@@ -65,14 +65,14 @@ const ContactTable = ({ contacts }) => {
     }
   }, [contacts.length, rowsPerPage, page]);
 
-  // useEffect(() => {
-  //   const pageNum = Math.floor(contacts.length / rowsPerPage);
-  //   if (page > pageNum) {
-  //     console.log('pageInUse: ', page);
-  //     console.log('pageNum: ', pageNum);
-  //     setPage(pageNum);
-  //   }
-  // }, [contacts.length, page, rowsPerPage]);
+  useEffect(() => {
+    const pageNum = Math.floor(contacts.length / rowsPerPage);
+    if (page > pageNum) {
+      console.log('pageInUse: ', page);
+      console.log('pageNum: ', pageNum);
+      setPage(pageNum);
+    }
+  }, [contacts.length, page, rowsPerPage]);
 
   return (
     <Box sx={{ width: '100%' }}>
