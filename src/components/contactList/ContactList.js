@@ -4,7 +4,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { selectors } from 'redux/phonebook';
 import { useGetContactsQuery } from 'services/contactsAPI';
 
-import ContactTable from 'components/contactList/CuntactTable';
+import ContactTable from 'components/contactList/ContactTable';
 
 const ContactList = () => {
   const filter = useSelector(selectors.getFilter);

@@ -11,7 +11,7 @@ import TextField from '@mui/material/TextField';
 import LoadingButton from '@mui/lab/LoadingButton';
 import PhoneMaskCustom from 'components/myApp/PhoneMaskCustom';
 
-const initState = { name: '', number: '' };
+const initState = { name: '', phone: '' };
 
 const ContactForm = () => {
   const [formValues, setFormValues] = useState(() => initState);
@@ -54,7 +54,7 @@ const ContactForm = () => {
     //   return;
     // }
 
-    // addContact({ name, phone: number });
+    addContact(formValues);
     // toast.success(`Contact ${name} successfully added`);
     // ressetForm();
     setFormValues(initState);
@@ -85,8 +85,8 @@ const ContactForm = () => {
         <TextField
           id="standard-basic"
           label="Phone"
-          name="number"
-          value={formValues.number}
+          name="phone"
+          value={formValues.phone}
           onChange={handleChange}
           InputProps={{
             inputMode: 'tel',

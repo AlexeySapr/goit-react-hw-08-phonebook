@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -26,10 +26,16 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
+function getCurrentPage() {
+  return 3;
+}
+
 const ContactTable = ({ contacts }) => {
   const [order, setOrder] = useState('asc');
-  const [orderBy, setOrderBy] = useState('name');
+  const [orderBy, setOrderBy] = useState('');
   const [page, setPage] = useState(0);
+  console.log('page: ', page);
+  console.log('contacts.length: ', contacts.length);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleRequestSort = (event, property) => {
@@ -43,13 +49,30 @@ const ContactTable = ({ contacts }) => {
   };
 
   const handleChangePage = (event, newPage) => {
+    console.log('event: ', event);
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = event => {
+    console.log('eventRowsPerPage: ', event);
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  useEffect(() => {
+    if (contacts.length <= rowsPerPage && page > 0) {
+      setPage(0);
+    }
+  }, [contacts.length, rowsPerPage, page]);
+
+  // useEffect(() => {
+  //   const pageNum = Math.floor(contacts.length / rowsPerPage);
+  //   if (page > pageNum) {
+  //     console.log('pageInUse: ', page);
+  //     console.log('pageNum: ', pageNum);
+  //     setPage(pageNum);
+  //   }
+  // }, [contacts.length, page, rowsPerPage]);
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -82,7 +105,7 @@ const ContactTable = ({ contacts }) => {
           component="div"
           count={contacts.length}
           rowsPerPage={rowsPerPage}
-          page={page}
+          page={contacts.length <= rowsPerPage ? 0 : page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
