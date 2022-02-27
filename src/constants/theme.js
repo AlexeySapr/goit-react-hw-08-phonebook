@@ -17,19 +17,22 @@ export const getTheme = mode => ({
   },
 
   palette: {
+    background: {
+      card: '#E3E6F0',
+    },
     mode,
   },
 
-  colors: {
-    primary: '#57d0e6',
-    white: '#fff',
-    borderColor: '#bdbdbd',
-    textColor: '#212529',
-    inputBoxShadow: '0 0 0 0.2rem rgba(87, 208, 230, 0.5)',
-  },
+  // colors: {
+  //   primary: '#57d0e6',
+  //   white: '#fff',
+  //   borderColor: '#bdbdbd',
+  //   textColor: '#212529',
+  //   inputBoxShadow: '0 0 0 0.2rem rgba(87, 208, 230, 0.5)',
+  // },
 
-  btnLoader: {
-    justifyContent: 'center',
-    alignIitems: 'center',
-  },
+  // btnLoader: {
+  //   justifyContent: 'center',
+  //   alignIitems: 'center',
+  // },
 });

@@ -26,10 +26,6 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-function getCurrentPage() {
-  return 3;
-}
-
 const ContactTable = ({ contacts }) => {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('');

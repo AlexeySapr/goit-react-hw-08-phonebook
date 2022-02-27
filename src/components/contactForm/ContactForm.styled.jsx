@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
 
 export const FormContacts = styled.form`
-  padding: 30px;
-  background-color: rgba(247, 230, 230, 50%);
+  /* padding: 30px; */
+  /* background-color: rgba(247, 230, 230, 50%); */
+  margin-bottom: 20px;
 `;
 
 export const InputLabel = styled.label`

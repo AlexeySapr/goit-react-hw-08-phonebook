@@ -4,6 +4,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import TableCell from '@mui/material/TableCell';
+import { padding } from '@mui/system';
 
 const headCells = [
   {
@@ -23,10 +24,18 @@ function ContactTableHead(props) {
   };
 
   return (
-    <TableHead>
+    <TableHead sx={{ backgroundColor: 'background.card' }}>
       <TableRow>
         {headCells.map(headCell => (
-          <TableCell key={headCell.id} align={'center'} padding={'normal'}>
+          <TableCell
+            key={headCell.id}
+            sx={{
+              fontSize: '1.275rem',
+              textAlign: 'center',
+              padding: 'normal',
+              textTransform: 'uppercase',
+            }}
+          >
             <TableSortLabel
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}

@@ -1,5 +1,3 @@
-// import Container from 'components/container/Container';
-import Section from 'components/section/Section';
 import Item from './Item';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
@@ -17,13 +15,13 @@ const MyApp = () => {
           <Grid item xs={12} sm={5} md={4}>
             <Item>
               <ContactForm />
+            </Item>
+            <Item>
               <ContactFilter />
             </Item>
           </Grid>
           <Grid item xs={12} sm={7} md={8}>
-            <Item>
-              <ContactList />
-            </Item>
+            <ContactList />
           </Grid>
         </Grid>
       </Container>
