@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import Box from '@mui/material/Box';
 
-const Item = styled(Box)(({ theme }) => {
+const ItemBox = styled(Box)(({ theme }) => {
   // console.log('theme: ', theme);
 
   return {
@@ -15,4 +15,4 @@ const Item = styled(Box)(({ theme }) => {
   };
 });
 
-export default Item;
+export default ItemBox;
