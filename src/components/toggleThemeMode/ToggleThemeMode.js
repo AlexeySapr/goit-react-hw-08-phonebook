@@ -1,35 +1,22 @@
-import { createContext, useState, useMemo } from 'react';
+import { createContext, useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { selectors } from 'redux/phonebook';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-// import Switch from '@mui/material/Switch';
 import { getTheme } from 'constants/theme';
 
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+// import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 const ToggleThemeMode = ({ children }) => {
-  const [mode, setMode] = useState('light');
-
-  const colorMode = useMemo(
-    () => ({
-      toggleColorMode: () => {
-        setMode(prevMode => (prevMode === 'light' ? 'dark' : 'light'));
-      },
-    }),
-    [],
-  );
-
-  const theme = useMemo(() => createTheme(getTheme(mode)), [mode]);
+  const themeMode = useSelector(selectors.getThemeMode);
+  const theme = useMemo(() => createTheme(getTheme(themeMode)), [themeMode]);
 
   return (
-    <ColorModeContext.Provider value={colorMode}>
+    <ColorModeContext.Provider value={themeMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        {/* <Switch
-          onChange={colorMode.toggleColorMode}
-          inputProps={{ 'aria-label': 'controlled' }}
-        /> */}
         {children}
       </ThemeProvider>
     </ColorModeContext.Provider>

@@ -1,9 +1,20 @@
-import { HeadContainer, Title, TitleWrapper } from './Header.styled';
-import Switch from '@mui/material/Switch';
+import {
+  HeadContainer,
+  Title,
+  TitleWrapper,
+  MaterialUISwitch,
+} from './Header.styled';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { selectors, actions } from 'redux/phonebook';
 
 import { FcContacts } from 'react-icons/fc';
 
 const Header = () => {
+  const themeMode = useSelector(selectors.getThemeMode);
+  console.log('themeMode: ', themeMode);
+  const dispatch = useDispatch();
+
   return (
     <HeadContainer>
       <TitleWrapper>
@@ -12,8 +23,13 @@ const Header = () => {
           <FcContacts />
         </Title>
 
-        <Switch
-          // onChange={colorMode.toggleColorMode}
+        <MaterialUISwitch
+          sx={{ m: 1 }}
+          onChange={() => {
+            dispatch(
+              actions.switchTheme(themeMode === 'light' ? 'dark' : 'light'),
+            );
+          }}
           inputProps={{ 'aria-label': 'controlled' }}
         />
       </TitleWrapper>
