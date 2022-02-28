@@ -4,7 +4,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import TableCell from '@mui/material/TableCell';
-import { padding } from '@mui/system';
 
 const headCells = [
   {
@@ -34,6 +33,7 @@ function ContactTableHead(props) {
               textAlign: 'center',
               padding: 'normal',
               textTransform: 'uppercase',
+              color: 'text.secondary',
             }}
           >
             <TableSortLabel

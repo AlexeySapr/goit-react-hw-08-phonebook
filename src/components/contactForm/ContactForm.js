@@ -26,9 +26,9 @@ const ContactForm = () => {
     });
   };
 
-  const isInContacts = ({ name, number }) => {
+  const isInContacts = ({ name, phone }) => {
     const normalizedName = name.toLowerCase().replace(/\s+/g, '');
-    const normalizedNumber = number.replace(/\D/g, '');
+    const normalizedNumber = phone.replace(/\D/g, '');
     return contacts.some(contact => {
       return (
         contact.name.toLowerCase().replace(/\s+/g, '') === normalizedName ||
@@ -41,22 +41,21 @@ const ContactForm = () => {
 
     console.log('formValues: ', formValues);
 
-    // if (contactsError) {
-    //   toast.error(`Server not responding`);
-    //   return;
-    // }
+    if (contactsError) {
+      toast.error(`Server not responding`);
+      return;
+    }
 
-    // if (isInContacts({ name, number })) {
-    //   toast.error('This contact already exists', {
-    //     duration: 3000,
-    //     position: 'top-center',
-    //   });
-    //   return;
-    // }
+    if (isInContacts(formValues)) {
+      toast.error('This contact already exists', {
+        duration: 5000,
+        position: 'top-center',
+      });
+      return;
+    }
 
     addContact(formValues);
-    // toast.success(`Contact ${name} successfully added`);
-    // ressetForm();
+    toast.success(`Contact ${formValues.name} successfully added`);
     setFormValues(initState);
   };
 

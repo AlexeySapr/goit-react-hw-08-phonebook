@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import Box from '@mui/material/Box';
 
 const Item = styled(Box)(({ theme }) => {
-  console.log('theme: ', theme);
+  // console.log('theme: ', theme);
 
   return {
     textAlign: 'center',

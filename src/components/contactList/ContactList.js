@@ -14,9 +14,11 @@ const ContactList = () => {
 
   let filteredContacts = [];
   if (contacts) {
-    filteredContacts = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter),
-    );
+    const copyContacts = [...contacts];
+
+    filteredContacts = copyContacts
+      .sort((prevContact, nextContact) => nextContact.id - prevContact.id)
+      .filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
   }
 
   useEffect(() => {

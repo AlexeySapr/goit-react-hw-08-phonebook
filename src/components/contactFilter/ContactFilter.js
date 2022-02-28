@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectors, actions } from 'redux/phonebook';
 import TextField from '@mui/material/TextField';
 
-import { InputLabel, FormInput } from './ContactFilter.styled';
+import { InputLabel } from './ContactFilter.styled';
 
 const ContactFilter = () => {
   const filter = useSelector(selectors.getFilter);

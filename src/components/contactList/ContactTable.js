@@ -45,7 +45,6 @@ const ContactTable = ({ contacts }) => {
   };
 
   const handleChangePage = (event, newPage) => {
-    console.log('event: ', event);
     setPage(newPage);
   };
 

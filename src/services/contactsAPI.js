@@ -20,6 +20,11 @@ export const contactsApi = createApi({
         method: 'POST',
         body: newContact,
       }),
+      // transformResponse: response => {
+      //   console.log('response: ', response);
+
+      //   return response.data;
+      // },
       invalidatesTags: ['Contacts'],
     }),
     deleteContact: builder.mutation({
