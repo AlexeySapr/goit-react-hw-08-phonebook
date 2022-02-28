@@ -5,6 +5,8 @@ export const filter = createReducer('', {
   [actions.changeFilter]: (_, { payload }) => payload,
 });
 
-export const toggleTheme = createReducer('light', {
-  [actions.switchTheme]: (_, { payload }) => payload,
+export const themeMode = createReducer(['light'], {
+  [actions.switchTheme]: (state, { payload }) => {
+    return [`${payload}`];
+  },
 });

@@ -17,10 +17,18 @@ export const getTheme = mode => ({
   },
 
   palette: {
-    background: {
-      card: '#E3E6F0',
-    },
     mode,
+    ...(mode === 'light'
+      ? {
+          background: {
+            card: '#E3E6F0',
+          },
+        }
+      : {
+          background: {
+            card: 'red',
+          },
+        }),
   },
 
   // colors: {

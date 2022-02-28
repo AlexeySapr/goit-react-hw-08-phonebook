@@ -7,19 +7,20 @@ import { getTheme } from 'constants/theme';
 
 // import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
-const ColorModeContext = createContext({ toggleColorMode: () => {} });
+// const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 const ToggleThemeMode = ({ children }) => {
   const themeMode = useSelector(selectors.getThemeMode);
+
   const theme = useMemo(() => createTheme(getTheme(themeMode)), [themeMode]);
 
   return (
-    <ColorModeContext.Provider value={themeMode}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        {children}
-      </ThemeProvider>
-    </ColorModeContext.Provider>
+    // <ColorModeContext.Provider value={themeMode}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
+    // </ColorModeContext.Provider>
   );
 };
 

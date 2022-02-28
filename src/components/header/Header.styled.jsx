@@ -47,6 +47,7 @@ export const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#132d57' : '#7a9bbd',
     width: 32,
     height: 32,
+    borderRadius: '25%',
     '&:before': {
       content: "''",
       position: 'absolute',
@@ -64,6 +65,6 @@ export const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-track': {
     opacity: 1,
     backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
-    borderRadius: 20 / 2,
+    borderRadius: 20 / 4,
   },
 }));

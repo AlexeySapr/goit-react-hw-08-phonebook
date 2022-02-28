@@ -31,6 +31,7 @@ const Header = () => {
             );
           }}
           inputProps={{ 'aria-label': 'controlled' }}
+          checked={themeMode === 'dark'}
         />
       </TitleWrapper>
     </HeadContainer>

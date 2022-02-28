@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux';
-import { store } from 'redux/store';
+import { store, persistor } from 'redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 // import 'index.css';
 // import App from 'App';
 import ToggleThemeMode from 'components/toggleThemeMode/ToggleThemeMode';
@@ -11,10 +12,12 @@ import MyApp from 'components/myApp/MyApp';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ToggleThemeMode>
-        {/* <App /> */}
-        <MyApp />
-      </ToggleThemeMode>
+      <PersistGate loading={null} persistor={persistor}>
+        <ToggleThemeMode>
+          {/* <App /> */}
+          <MyApp />
+        </ToggleThemeMode>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
