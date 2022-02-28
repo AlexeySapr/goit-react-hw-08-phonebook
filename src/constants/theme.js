@@ -26,7 +26,7 @@ export const getTheme = mode => ({
         }
       : {
           background: {
-            card: 'red',
+            card: '#222C2F',
           },
         }),
   },
@@ -37,10 +37,5 @@ export const getTheme = mode => ({
   //   borderColor: '#bdbdbd',
   //   textColor: '#212529',
   //   inputBoxShadow: '0 0 0 0.2rem rgba(87, 208, 230, 0.5)',
-  // },
-
-  // btnLoader: {
-  //   justifyContent: 'center',
-  //   alignIitems: 'center',
   // },
 });

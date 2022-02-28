@@ -30,8 +30,8 @@ const ContactTable = ({ contacts }) => {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('');
   const [page, setPage] = useState(0);
-  console.log('page: ', page);
-  console.log('contacts.length: ', contacts.length);
+  // console.log('page: ', page);
+  // console.log('contacts.length: ', contacts.length);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleRequestSort = (event, property) => {

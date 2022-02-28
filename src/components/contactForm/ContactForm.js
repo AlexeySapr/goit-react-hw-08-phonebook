@@ -39,8 +39,6 @@ const ContactForm = () => {
   const onSubmit = event => {
     event.preventDefault();
 
-    console.log('formValues: ', formValues);
-
     if (contactsError) {
       toast.error(`Server not responding`);
       return;

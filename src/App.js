@@ -1,4 +1,4 @@
-import ItemBox from 'components/itemBox/ItemBox';
+import ItemBox from 'components/itemBox/ItemBox.styled';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Header from 'components/header/Header';

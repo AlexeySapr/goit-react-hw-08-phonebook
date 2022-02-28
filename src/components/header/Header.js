@@ -7,12 +7,10 @@ import {
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectors, actions } from 'redux/phonebook';
-
-import { FcContacts } from 'react-icons/fc';
+import { MdContactPhone } from 'react-icons/md';
 
 const Header = () => {
   const themeMode = useSelector(selectors.getThemeMode);
-  console.log('themeMode: ', themeMode);
   const dispatch = useDispatch();
 
   return (
@@ -20,7 +18,7 @@ const Header = () => {
       <TitleWrapper>
         <Title variant="h5">
           Phonebook
-          <FcContacts />
+          <MdContactPhone style={{ marginLeft: '10px' }} />
         </Title>
 
         <MaterialUISwitch
