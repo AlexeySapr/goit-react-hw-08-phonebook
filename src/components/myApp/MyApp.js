@@ -5,10 +5,12 @@ import Header from 'components/header/Header';
 import ContactForm from 'components/contactForm/ContactForm';
 import ContactList from 'components/contactList/ContactList';
 import ContactFilter from 'components/contactFilter/ContactFilter';
+import { Toaster } from 'react-hot-toast';
 
 const MyApp = () => {
   return (
     <>
+      <Toaster />
       <Header />
       <Container maxWidth="lg">
         <Grid container spacing={2}>

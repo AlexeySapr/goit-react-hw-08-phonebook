@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import {
   useGetContactsQuery,
   useAddContactMutation,
@@ -60,53 +60,48 @@ const ContactForm = () => {
   };
 
   return (
-    <>
-      <Toaster />
-      <FormContacts onSubmit={onSubmit}>
-        <TextField
-          id="standard-basic"
-          label="Name"
-          name="name"
-          value={formValues.name}
-          onChange={handleChange}
-          inputProps={{
-            inputMode: 'text',
-            pattern:
-              "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$",
-            title:
-              'Name may contain only letters, apostrophe, dash and spaces.',
-          }}
-          variant="standard"
-          sx={{ mb: 2 }}
-          fullWidth
-          required
-        />
-        <TextField
-          id="standard-basic"
-          label="Phone"
-          name="phone"
-          value={formValues.phone}
-          onChange={handleChange}
-          InputProps={{
-            inputMode: 'tel',
-            inputComponent: PhoneMaskCustom,
-          }}
-          variant="standard"
-          sx={{ mb: 2 }}
-          fullWidth
-          required
-        />
-        <LoadingButton
-          type="submit"
-          loading={isLoading}
-          disabled={isLoading}
-          loadingIndicator="Adding..."
-          variant="outlined"
-        >
-          Add contact
-        </LoadingButton>
-      </FormContacts>
-    </>
+    <FormContacts onSubmit={onSubmit}>
+      <TextField
+        id="standard-basic"
+        label="Name"
+        name="name"
+        value={formValues.name}
+        onChange={handleChange}
+        inputProps={{
+          inputMode: 'text',
+          pattern: "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$",
+          title: 'Name may contain only letters, apostrophe, dash and spaces.',
+        }}
+        variant="standard"
+        sx={{ mb: 2 }}
+        fullWidth
+        required
+      />
+      <TextField
+        id="standard-basic"
+        label="Phone"
+        name="phone"
+        value={formValues.phone}
+        onChange={handleChange}
+        InputProps={{
+          inputMode: 'tel',
+          inputComponent: PhoneMaskCustom,
+        }}
+        variant="standard"
+        sx={{ mb: 2 }}
+        fullWidth
+        required
+      />
+      <LoadingButton
+        type="submit"
+        loading={isLoading}
+        disabled={isLoading}
+        loadingIndicator="Adding..."
+        variant="outlined"
+      >
+        Add contact
+      </LoadingButton>
+    </FormContacts>
   );
 };
 

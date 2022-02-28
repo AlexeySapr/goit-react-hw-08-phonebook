@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { selectors } from 'redux/phonebook';
 import { useGetContactsQuery } from 'services/contactsAPI';
 
@@ -28,10 +28,7 @@ const ContactList = () => {
   }, [error]);
 
   return (
-    <>
-      {error && <Toaster />}
-      {!error && contacts && <ContactTable contacts={filteredContacts} />}
-    </>
+    <>{!error && contacts && <ContactTable contacts={filteredContacts} />}</>
   );
 };
 
