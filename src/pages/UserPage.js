@@ -1,6 +1,6 @@
-import ItemBox from 'components/itemBox/ItemBox.styled';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import ItemBox from 'components/itemBox/ItemBox.styled';
 
 import ContactForm from 'components/contactForm/ContactForm';
 import ContactList from 'components/contactList/ContactList';
