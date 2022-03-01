@@ -8,6 +8,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { selectors, actions } from 'redux/phonebook';
 import { MdContactPhone } from 'react-icons/md';
+import UserMenu from 'components/userMenu/UserMenu';
 
 const Header = () => {
   const themeMode = useSelector(selectors.getThemeMode);
@@ -20,6 +21,8 @@ const Header = () => {
           Phonebook
           <MdContactPhone style={{ marginLeft: '10px' }} />
         </Title>
+
+        <UserMenu />
 
         <MaterialUISwitch
           sx={{ m: 1 }}
