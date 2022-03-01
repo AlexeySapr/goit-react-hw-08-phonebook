@@ -6,13 +6,10 @@ import LoginForm from 'components/loginForm/LoginForm';
 const Login = () => {
   return (
     <Container maxWidth="lg">
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={6} md={6}>
-          <ItemBox>
-            <LoginForm />
-          </ItemBox>
-        </Grid>
-        <Grid item xs={12} sm={6} md={6}></Grid>
+      <Grid item xs={12} sm={6} md={6} sx={{ margin: '0 auto' }}>
+        <ItemBox>
+          <LoginForm />
+        </ItemBox>
       </Grid>
     </Container>
   );
