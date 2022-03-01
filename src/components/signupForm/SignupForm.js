@@ -13,6 +13,8 @@ const SignupForm = () => {
   const [formValues, setFormValues] = useState(() => initState);
   const location = useLocation();
 
+  const isLoggedIn = useSelector(selectors.getIsLoggedIn);
+
   const dispatch = useDispatch();
 
   const handleChange = event => {
