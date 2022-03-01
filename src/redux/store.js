@@ -1,5 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { filter, themeMode } from './phonebook/phonebook-reducer';
+import { authReducer } from './auth';
 import { contactsApi } from 'services/contactsAPI';
 
 import {
@@ -17,25 +18,22 @@ import storage from 'redux-persist/lib/storage';
 const phonebookPersistConfig = {
   key: 'themeMode',
   storage: storage,
-  whitelist: ['themeMode'],
+  // whitelist: ['themeMode'],
 };
 
-// const rootReducer = combineReducers({
-//   filter,
-//   theme: persistReducer(phonebookPersistConfig, toggleTheme),
-//   [contactsApi.reducerPath]: contactsApi.reducer,
-// });
-
-const rootReducer = combineReducers({
-  filter,
-  themeMode,
-  [contactsApi.reducerPath]: contactsApi.reducer,
-});
-
-const persistedReducer = persistReducer(phonebookPersistConfig, rootReducer);
+const authPersistConfig = {
+  key: 'auth',
+  storage: storage,
+  // whitelist: ['themeMode'],
+};
 
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: {
+    filter,
+    theme: persistReducer(phonebookPersistConfig, themeMode),
+    auth: persistReducer(authPersistConfig, authReducer),
+    [contactsApi.reducerPath]: contactsApi.reducer,
+  },
 
   middleware: getDefaultMiddleware => [
     ...getDefaultMiddleware({
@@ -51,3 +49,17 @@ const store = configureStore({
 const persistor = persistStore(store);
 
 export { store, persistor };
+
+// const rootReducer = combineReducers({
+//   filter,
+//   themeMode,
+//   [contactsApi.reducerPath]: contactsApi.reducer,
+// });
+
+// const persistedReducer = persistReducer(phonebookPersistConfig, rootReducer);
+
+// const rootReducer = combineReducers({
+//   filter,
+//   theme: persistReducer(phonebookPersistConfig, toggleTheme),
+//   [contactsApi.reducerPath]: contactsApi.reducer,
+// });

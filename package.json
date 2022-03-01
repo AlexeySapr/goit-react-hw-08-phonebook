@@ -9,6 +9,7 @@
     "@mui/lab": "^5.0.0-alpha.67",
     "@mui/material": "^5.4.0",
     "@reduxjs/toolkit": "^1.7.1",
+    "axios": "^0.26.0",
     "gh-pages": "^3.2.3",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
