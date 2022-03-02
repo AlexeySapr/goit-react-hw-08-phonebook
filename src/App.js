@@ -1,6 +1,7 @@
 import Appbar from 'components/appbar/Appbar';
 import Login from 'pages/Login';
 import PrivateRoute from 'pages/PrivateRoute';
+import PublicRoute from 'pages/PublicRoute';
 import Signup from 'pages/Signup';
 import UserPage from 'pages/UserPage';
 import { Routes, Route } from 'react-router-dom';
@@ -10,9 +11,33 @@ const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Appbar />}>
-          <Route index element={<Login />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<Signup />} />
+          <Route
+            index
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+
+          <Route
+            path="login"
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+
+          <Route
+            path="signup"
+            element={
+              <PublicRoute>
+                <Signup />
+              </PublicRoute>
+            }
+          />
+
           <Route
             path="user"
             element={
@@ -21,7 +46,6 @@ const App = () => {
               </PrivateRoute>
             }
           />
-          {/* <Route path="user" element={<UserPage />} /> */}
         </Route>
       </Routes>
     </>
@@ -29,3 +53,5 @@ const App = () => {
 };
 
 export default App;
+
+/* <Route path="signup" element={<Signup />} /> */

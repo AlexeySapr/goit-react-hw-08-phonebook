@@ -2,8 +2,8 @@ import React from 'react';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { MdOutlineLogout } from 'react-icons/md';
 import { UserName } from './UserMenu.styled';
-import { useSelector, useDispatch } from 'react-redux';
-import { authSelectors, authOperations } from 'redux/auth';
+import { useDispatch } from 'react-redux';
+import { authOperations } from 'redux/auth';
 
 const UserMenu = ({ emailUser }) => {
   const dispatch = useDispatch();
