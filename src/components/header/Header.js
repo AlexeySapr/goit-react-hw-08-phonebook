@@ -7,11 +7,14 @@ import {
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectors, actions } from 'redux/phonebook';
+import { authSelectors } from 'redux/auth';
 import { MdContactPhone } from 'react-icons/md';
 import UserMenu from 'components/userMenu/UserMenu';
 
 const Header = () => {
   const themeMode = useSelector(selectors.getThemeMode);
+  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
+  const userEmail = useSelector(authSelectors.getUserEmail);
   const dispatch = useDispatch();
 
   return (
@@ -22,7 +25,7 @@ const Header = () => {
           <MdContactPhone style={{ marginLeft: '10px' }} />
         </Title>
 
-        <UserMenu />
+        {isLoggedIn && <UserMenu emailUser={userEmail} />}
 
         <MaterialUISwitch
           sx={{ m: 1 }}

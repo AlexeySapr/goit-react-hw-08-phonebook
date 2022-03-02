@@ -1,10 +1,10 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectors } from 'redux/auth';
+import { authSelectors } from 'redux/auth';
 
 const PrivateRoute = ({ children }) => {
-  const isLoggedIn = useSelector(selectors.getIsLoggedIn);
+  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
   let location = useLocation();
   return (
     <>

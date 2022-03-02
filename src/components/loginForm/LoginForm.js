@@ -4,11 +4,15 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { useLocation } from 'react-router-dom';
 import { SignupLoginLink } from './LoginForm.styled';
 
+import { useDispatch } from 'react-redux';
+import { authOperations } from 'redux/auth';
+
 const initState = { email: '', password: '' };
 
 const LoginForm = () => {
   const [formValues, setFormValues] = useState(() => initState);
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const handleChange = event => {
     setFormValues({
@@ -20,6 +24,8 @@ const LoginForm = () => {
   const onSubmit = event => {
     event.preventDefault();
     console.log('formValues: ', formValues);
+    const { email, password } = formValues;
+    dispatch(authOperations.logInOperation({ email, password }));
     setFormValues(initState);
   };
 

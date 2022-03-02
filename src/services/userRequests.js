@@ -1,4 +1,4 @@
-import { http } from './axiosInstance';
+import http from './axiosInstance';
 
 export const signUp = userData => {
   return http.post('users/signup', userData);
