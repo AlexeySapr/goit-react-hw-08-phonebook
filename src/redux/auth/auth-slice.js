@@ -33,8 +33,3 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-
-//  {
-//    state.user = action.payload.user;
-//    state.token = action.payload.token;
-//  }

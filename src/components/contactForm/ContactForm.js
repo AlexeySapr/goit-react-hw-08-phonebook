@@ -11,7 +11,7 @@ import TextField from '@mui/material/TextField';
 import LoadingButton from '@mui/lab/LoadingButton';
 import PhoneMaskCustom from 'components/phoneMaskCustom/PhoneMaskCustom';
 
-const initState = { name: '', phone: '' };
+const initState = { name: '', number: '' };
 
 const ContactForm = () => {
   const [formValues, setFormValues] = useState(() => initState);
@@ -26,18 +26,19 @@ const ContactForm = () => {
     });
   };
 
-  const isInContacts = ({ name, phone }) => {
+  const isInContacts = ({ name, number }) => {
     const normalizedName = name.toLowerCase().replace(/\s+/g, '');
-    const normalizedNumber = phone.replace(/\D/g, '');
+    const normalizedNumber = number.replace(/\D/g, '');
     return contacts.some(contact => {
       return (
         contact.name.toLowerCase().replace(/\s+/g, '') === normalizedName ||
-        contact.phone.replace(/\D/g, '') === normalizedNumber
+        contact.number.replace(/\D/g, '') === normalizedNumber
       );
     });
   };
   const onSubmit = event => {
     event.preventDefault();
+    console.log('formValues: ', formValues);
 
     if (contactsError) {
       toast.error(`Server not responding`);
@@ -51,8 +52,8 @@ const ContactForm = () => {
       });
       return;
     }
-
-    addContact(formValues);
+    const { name, number } = formValues;
+    addContact({ name, number });
     toast.success(`Contact ${formValues.name} successfully added`);
     setFormValues(initState);
   };
@@ -78,8 +79,8 @@ const ContactForm = () => {
       <TextField
         id="standard-basic"
         label="Phone"
-        name="phone"
-        value={formValues.phone}
+        name="number"
+        value={formValues.number}
         onChange={handleChange}
         InputProps={{
           inputMode: 'tel',

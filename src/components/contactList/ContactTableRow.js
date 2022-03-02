@@ -6,7 +6,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { useDeleteContactMutation } from 'services/contactsAPI';
 import toast from 'react-hot-toast';
 
-const ContactTableRow = ({ id, name, phone }) => {
+const ContactTableRow = ({ id, name, number }) => {
   const [onDelete, { data, isLoading: isDeleting }] =
     useDeleteContactMutation();
 
@@ -19,7 +19,7 @@ const ContactTableRow = ({ id, name, phone }) => {
   return (
     <TableRow hover role="listitem" tabIndex={-1}>
       <TableCell align="center">{name}</TableCell>
-      <TableCell align="center">{phone}</TableCell>
+      <TableCell align="center">{number}</TableCell>
       <TableCell align="center">
         <LoadingButton
           onClick={() => onDelete(id)}
@@ -38,7 +38,7 @@ const ContactTableRow = ({ id, name, phone }) => {
 ContactTableRow.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
 };
 
 export default ContactTableRow;

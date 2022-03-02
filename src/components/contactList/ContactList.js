@@ -8,7 +8,9 @@ import ContactTable from 'components/contactList/ContactTable';
 
 const ContactList = () => {
   const filter = useSelector(selectors.getFilter);
+  // const { data: contacts, error } = useGetContactsQuery();
   const { data: contacts, error } = useGetContactsQuery();
+  console.log('data: ', contacts);
 
   const normalizedFilter = filter.toLowerCase();
 

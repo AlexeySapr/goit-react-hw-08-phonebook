@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { signUp, logIn, logOut } from 'services/userRequests';
-import http from '../../services/axiosInstance';
+import http from 'services/axiosInstance';
 
 const token = {
   set(token) {

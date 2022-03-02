@@ -1,24 +1,52 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import axios from 'axios';
+
+const axiosBaseQuery =
+  ({ baseUrl } = { baseUrl: '' }) =>
+  async ({ url, method, data }) => {
+    try {
+      const result = await axios({
+        url: baseUrl + url,
+        method,
+        data,
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjFmMWU0MzVhMmMzNDAwMTUxNzY2YTUiLCJpYXQiOjE2NDYyMTcyMzB9.k45AYfGQPQi2RtuqIgMsbNViH-_WwpwhPZyf9311ZNo',
+        },
+      });
+      return { data: result.data };
+    } catch (axiosError) {
+      let err = axiosError;
+      return {
+        error: { status: err.response?.status, data: err.response?.data },
+      };
+    }
+  };
 
 export const contactsApi = createApi({
   reducerPath: 'contactsApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'https://61dd6565f60e8f0017668798.mockapi.io',
+  baseQuery: axiosBaseQuery({
+    baseUrl: 'https://connections-api.herokuapp.com',
   }),
   tagTypes: ['Contacts'],
+
   endpoints: builder => ({
     getContacts: builder.query({
-      query: () => '/contacts',
+      query: () => ({
+        url: `/contacts`,
+        method: 'GET',
+      }),
       providesTags: result =>
         result
           ? result.map(({ id }) => ({ type: 'Contacts', id }))
           : ['Contacts'],
     }),
+
     addContact: builder.mutation({
       query: newContact => ({
         url: `/contacts`,
         method: 'POST',
-        body: newContact,
+        data: newContact,
       }),
       // transformResponse: response => {
       //   console.log('response: ', response);
@@ -27,6 +55,7 @@ export const contactsApi = createApi({
       // },
       invalidatesTags: ['Contacts'],
     }),
+
     deleteContact: builder.mutation({
       query: contactID => ({
         url: `/contacts/${contactID}`,
