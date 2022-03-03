@@ -1,4 +1,4 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { filter, themeMode } from './phonebook/phonebook-reducer';
 import { authReducer } from './auth';
 import { contactsApi } from 'services/contactsAPI';

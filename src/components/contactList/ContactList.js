@@ -1,15 +1,16 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import toast from 'react-hot-toast';
 import { selectors } from 'redux/phonebook';
+import toast from 'react-hot-toast';
 import { useGetContactsQuery } from 'services/contactsAPI';
 
 import ContactTable from 'components/contactList/ContactTable';
 
 const ContactList = () => {
   const filter = useSelector(selectors.getFilter);
-  // const { data: contacts, error } = useGetContactsQuery();
-  const { data: contacts, error } = useGetContactsQuery();
+  const { data: contacts, error } = useGetContactsQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
   console.log('data: ', contacts);
 
   const normalizedFilter = filter.toLowerCase();
