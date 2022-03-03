@@ -11,7 +11,6 @@ const ContactList = () => {
   const { data: contacts, error } = useGetContactsQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
-  console.log('data: ', contacts);
 
   const normalizedFilter = filter.toLowerCase();
 

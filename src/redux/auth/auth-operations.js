@@ -17,7 +17,6 @@ export const signUpOperation = createAsyncThunk(
   async userData => {
     try {
       const response = await signUp(userData);
-      console.log('signUpResponse: ', response);
       token.set(response.data.token);
       return response.data;
     } catch (error) {
@@ -31,7 +30,6 @@ export const logInOperation = createAsyncThunk(
   async userData => {
     try {
       const response = await logIn(userData);
-      console.log('loginResponse: ', response);
       token.set(response.data.token);
       return response.data;
     } catch (error) {
@@ -44,7 +42,8 @@ export const logOutOperation = createAsyncThunk('auth/logOutUser', async () => {
   try {
     const response = await logOut();
     token.unset();
-    console.log('logOutResponse: ', response);
     return response.data;
-  } catch (error) {}
+  } catch (error) {
+    console.log('error: ', error);
+  }
 });
