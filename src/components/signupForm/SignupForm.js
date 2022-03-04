@@ -23,7 +23,6 @@ const SignupForm = () => {
 
   const onSubmit = event => {
     event.preventDefault();
-    console.log('formValues: ', formValues);
     const { name, email, password } = formValues;
     dispatch(authOperations.signUpOperation({ name, email, password }));
     setFormValues(initState);
