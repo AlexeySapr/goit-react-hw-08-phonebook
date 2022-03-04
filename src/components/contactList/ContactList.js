@@ -2,15 +2,13 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectors } from 'redux/phonebook';
 import toast from 'react-hot-toast';
-import { useGetContactsQuery } from 'services/contactsAPI';
-
+import { contactsApi, useGetContactsQuery } from 'services/contactsAPI';
 import ContactTable from 'components/contactList/ContactTable';
+import { store } from 'redux/store';
 
 const ContactList = () => {
   const filter = useSelector(selectors.getFilter);
-  const { data: contacts, error } = useGetContactsQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-  });
+  const { data: contacts, error } = useGetContactsQuery();
 
   const normalizedFilter = filter.toLowerCase();
 
@@ -22,6 +20,12 @@ const ContactList = () => {
       .sort((prevContact, nextContact) => nextContact.id - prevContact.id)
       .filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
   }
+
+  useEffect(() => {
+    return () => {
+      store.dispatch(contactsApi.util.resetApiState());
+    };
+  }, []);
 
   useEffect(() => {
     if (error) {
