@@ -7,10 +7,18 @@ import { SignupLoginLink } from './LoginForm.styled';
 import { useDispatch } from 'react-redux';
 import { authOperations } from 'redux/auth';
 
+import {
+  useValidateEmail,
+  useValidatePassword,
+} from 'components/utils/validateHooks/ValidateHooks';
+
 const initState = { email: '', password: '' };
 
 const LoginForm = () => {
   const [formValues, setFormValues] = useState(() => initState);
+  const [isEmailError, emailErrorText] = useValidateEmail(formValues);
+  const [isPassError, passErrorText] = useValidatePassword(formValues);
+  const [isFormError, setIsFormError] = useState(false);
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -39,14 +47,9 @@ const LoginForm = () => {
           type="email"
           value={formValues.email}
           onChange={handleChange}
-          //   inputProps={{
-          //     inputMode: 'text',
-          //     pattern:
-          //       "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$",
-          //     title:
-          //       'Name may contain only letters, apostrophe, dash and spaces.',
-          //   }}
           variant="standard"
+          error={isFormError && isEmailError}
+          helperText={isFormError && emailErrorText}
           sx={{ mb: 2 }}
           fullWidth
           required
@@ -60,6 +63,8 @@ const LoginForm = () => {
           onChange={handleChange}
           autoComplete="current-password"
           variant="standard"
+          error={isFormError && isPassError}
+          helperText={isFormError && passErrorText}
           sx={{ mb: 2 }}
           fullWidth
           required
