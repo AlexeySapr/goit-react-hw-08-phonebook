@@ -10,9 +10,11 @@ const ContactTableRow = ({ id, name, number }) => {
   const [onDelete, { data, isLoading: isDeleting }] =
     useDeleteContactMutation();
 
+  console.log('data: ', data);
+
   useEffect(() => {
     if (data) {
-      toast.success(`Contact ${data.name} successfully deleted`);
+      toast.success(`Contact successfully deleted`);
     }
   }, [data]);
 

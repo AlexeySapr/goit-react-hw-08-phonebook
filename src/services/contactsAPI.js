@@ -20,7 +20,10 @@ export const contactsApi = createApi({
         url: `/contacts`,
         method: 'GET',
       }),
-      providesTags: ['Contacts'],
+      providesTags: result =>
+        result
+          ? result.map(({ id }) => ({ type: 'Contacts', id }))
+          : ['Contacts'],
     }),
 
     addContact: builder.mutation({
