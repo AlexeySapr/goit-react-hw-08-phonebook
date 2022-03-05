@@ -32,6 +32,10 @@ const LoginForm = () => {
   const onSubmit = event => {
     event.preventDefault();
     const { email, password } = formValues;
+    if (isEmailError || isPassError) {
+      setIsFormError(true);
+      return;
+    }
     dispatch(authOperations.logInOperation({ email, password }));
     setFormValues(initState);
   };
