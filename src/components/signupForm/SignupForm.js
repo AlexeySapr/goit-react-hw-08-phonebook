@@ -7,10 +7,19 @@ import { SignupLoginLink } from '../loginForm/LoginForm.styled';
 import { useDispatch } from 'react-redux';
 import { authOperations } from 'redux/auth';
 
+import {
+  useValidateName,
+  useValidateEmail,
+  useValidatePassword,
+} from 'components/utils/validateHooks/ValidateHooks';
+
 const initState = { name: '', email: '', password: '' };
 
 const SignupForm = () => {
   const [formValues, setFormValues] = useState(() => initState);
+  const [isNameError, nameErrorText] = useValidateName(formValues);
+  const [isEmailError, emailErrorText] = useValidateEmail(formValues);
+  const [isPassError, passErrorText] = useValidatePassword(formValues);
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -24,6 +33,9 @@ const SignupForm = () => {
   const onSubmit = event => {
     event.preventDefault();
     const { name, email, password } = formValues;
+    if (isNameError || isEmailError || isPassError) {
+      return;
+    }
     dispatch(authOperations.signUpOperation({ name, email, password }));
     setFormValues(initState);
   };
@@ -39,14 +51,9 @@ const SignupForm = () => {
           type="text"
           value={formValues.name}
           onChange={handleChange}
-          //   inputProps={{
-          //     inputMode: 'text',
-          //     pattern:
-          //       "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$",
-          //     title:
-          //       'Name may contain only letters, apostrophe, dash and spaces.',
-          //   }}
           variant="standard"
+          error={isNameError}
+          helperText={nameErrorText}
           sx={{ mb: 2 }}
           fullWidth
           required
@@ -58,14 +65,9 @@ const SignupForm = () => {
           type="email"
           value={formValues.email}
           onChange={handleChange}
-          //   inputProps={{
-          //     inputMode: 'text',
-          //     pattern:
-          //       "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$",
-          //     title:
-          //       'Name may contain only letters, apostrophe, dash and spaces.',
-          //   }}
           variant="standard"
+          error={isEmailError}
+          helperText={emailErrorText}
           sx={{ mb: 2 }}
           fullWidth
           required
@@ -79,6 +81,8 @@ const SignupForm = () => {
           onChange={handleChange}
           autoComplete="current-password"
           variant="standard"
+          error={isPassError}
+          helperText={passErrorText}
           sx={{ mb: 2 }}
           fullWidth
           required

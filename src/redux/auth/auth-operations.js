@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { signUp, logIn, logOut } from 'services/userRequests';
+import toast from 'react-hot-toast';
 import http from 'services/axiosInstance';
 
 const token = {
@@ -17,10 +18,13 @@ export const signUpOperation = createAsyncThunk(
   async userData => {
     try {
       const response = await signUp(userData);
+      console.log('signUpResponse: ', response);
       token.set(response.data.token);
+      toast.success(`You are registered!`);
       return response.data;
     } catch (error) {
-      console.log('error: ', error);
+      toast.error(`${error.response?.data.message}`);
+      console.log('signUpError: ', error.response.data.message);
     }
   },
 );
@@ -31,9 +35,11 @@ export const logInOperation = createAsyncThunk(
     try {
       const response = await logIn(userData);
       token.set(response.data.token);
+      toast.success(`You are in!`);
       return response.data;
     } catch (error) {
-      console.log('error: ', error);
+      toast.error(`${error}`);
+      console.log('logInError: ', error);
     }
   },
 );
@@ -44,6 +50,6 @@ export const logOutOperation = createAsyncThunk('auth/logOutUser', async () => {
     token.unset();
     return response.data;
   } catch (error) {
-    console.log('error: ', error);
+    console.log('logOutError: ', error);
   }
 });
