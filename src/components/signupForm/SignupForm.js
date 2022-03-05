@@ -20,6 +20,7 @@ const SignupForm = () => {
   const [isNameError, nameErrorText] = useValidateName(formValues);
   const [isEmailError, emailErrorText] = useValidateEmail(formValues);
   const [isPassError, passErrorText] = useValidatePassword(formValues);
+  const [isFormError, setIsFormError] = useState(false);
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -34,8 +35,10 @@ const SignupForm = () => {
     event.preventDefault();
     const { name, email, password } = formValues;
     if (isNameError || isEmailError || isPassError) {
+      setIsFormError(true);
       return;
     }
+    setIsFormError(false);
     dispatch(authOperations.signUpOperation({ name, email, password }));
     setFormValues(initState);
   };
@@ -52,8 +55,8 @@ const SignupForm = () => {
           value={formValues.name}
           onChange={handleChange}
           variant="standard"
-          error={isNameError}
-          helperText={nameErrorText}
+          error={isFormError && isNameError}
+          helperText={isFormError && nameErrorText}
           sx={{ mb: 2 }}
           fullWidth
           required
@@ -66,8 +69,8 @@ const SignupForm = () => {
           value={formValues.email}
           onChange={handleChange}
           variant="standard"
-          error={isEmailError}
-          helperText={emailErrorText}
+          error={isFormError && isEmailError}
+          helperText={isFormError && emailErrorText}
           sx={{ mb: 2 }}
           fullWidth
           required
@@ -81,8 +84,8 @@ const SignupForm = () => {
           onChange={handleChange}
           autoComplete="current-password"
           variant="standard"
-          error={isPassError}
-          helperText={passErrorText}
+          error={isFormError && isPassError}
+          helperText={isFormError && passErrorText}
           sx={{ mb: 2 }}
           fullWidth
           required
