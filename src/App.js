@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Appbar from 'components/appbar/Appbar';
 import Login from 'pages/Login';
 import PrivateRoute from 'pages/PrivateRoute';
@@ -6,7 +7,16 @@ import Signup from 'pages/Signup';
 import UserPage from 'pages/UserPage';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { authSelectors, authOperations } from 'redux/auth';
+
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authOperations.getCurrentUserOperation());
+  }, [dispatch]);
+
   return (
     <>
       <Routes>

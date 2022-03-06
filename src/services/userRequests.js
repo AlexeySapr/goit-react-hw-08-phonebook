@@ -11,3 +11,7 @@ export const logIn = userData => {
 export const logOut = () => {
   return http.post('users/logout');
 };
+
+export const getUser = () => {
+  return http.get('users/current');
+};

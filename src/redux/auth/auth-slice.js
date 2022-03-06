@@ -39,6 +39,20 @@ const authSlice = createSlice({
       ...state,
       ...initialState,
     }),
+
+    [authOperations.getCurrentUserOperation.fulfilled]: (
+      state,
+      { payload },
+    ) => {
+      if (!payload) {
+        return;
+      }
+      return {
+        ...state,
+        user: payload,
+        isLoggedIn: true,
+      };
+    },
   },
 });
 

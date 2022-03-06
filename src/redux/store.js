@@ -18,13 +18,12 @@ import storage from 'redux-persist/lib/storage';
 const phonebookPersistConfig = {
   key: 'themeMode',
   storage: storage,
-  // whitelist: ['themeMode'],
 };
 
 const authPersistConfig = {
   key: 'auth',
   storage: storage,
-  // whitelist: ['themeMode'],
+  whitelist: ['token'],
 };
 
 const store = configureStore({
@@ -49,17 +48,3 @@ const store = configureStore({
 const persistor = persistStore(store);
 
 export { store, persistor };
-
-// const rootReducer = combineReducers({
-//   filter,
-//   themeMode,
-//   [contactsApi.reducerPath]: contactsApi.reducer,
-// });
-
-// const persistedReducer = persistReducer(phonebookPersistConfig, rootReducer);
-
-// const rootReducer = combineReducers({
-//   filter,
-//   theme: persistReducer(phonebookPersistConfig, toggleTheme),
-//   [contactsApi.reducerPath]: contactsApi.reducer,
-// });

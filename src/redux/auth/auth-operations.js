@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { signUp, logIn, logOut } from 'services/userRequests';
+import { signUp, logIn, logOut, getUser } from 'services/userRequests';
 import toast from 'react-hot-toast';
 import http from 'services/axiosInstance';
 
@@ -53,3 +53,23 @@ export const logOutOperation = createAsyncThunk('auth/logOutUser', async () => {
     console.log('logOutError: ', error);
   }
 });
+
+export const getCurrentUserOperation = createAsyncThunk(
+  'auth/getCurrentUser',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const userToken = state.auth.token;
+    if (!userToken) {
+      return;
+    }
+
+    token.set(userToken);
+    try {
+      const response = await getUser();
+      console.log('response: ', response);
+      return response.data;
+    } catch (error) {
+      console.log('getCurrentUserError: ', error);
+    }
+  },
+);
