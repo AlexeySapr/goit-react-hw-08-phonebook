@@ -4,7 +4,7 @@ import PrivateRoute from 'pages/PrivateRoute';
 import PublicRoute from 'pages/PublicRoute';
 import Signup from 'pages/Signup';
 import UserPage from 'pages/UserPage';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 const App = () => {
   return (
@@ -19,6 +19,8 @@ const App = () => {
               </PublicRoute>
             }
           />
+
+          <Route path="react-phonebook" element={<Navigate to="/" replace />} />
 
           <Route
             path="login"
