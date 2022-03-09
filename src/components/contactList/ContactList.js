@@ -9,6 +9,7 @@ import { store } from 'redux/store';
 const ContactList = () => {
   const filter = useSelector(selectors.getFilter);
   const { data: contacts, error } = useGetContactsQuery();
+  console.log('contacts: ', contacts);
 
   const normalizedFilter = filter.toLowerCase();
 
