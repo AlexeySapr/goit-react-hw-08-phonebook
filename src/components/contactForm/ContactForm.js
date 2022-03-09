@@ -1,23 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import TextField from '@mui/material/TextField';
+import LoadingButton from '@mui/lab/LoadingButton';
 import {
   useGetContactsQuery,
   useAddContactMutation,
 } from 'services/contactsAPI';
+import {
+  useValidateName,
+  useValidatePhone,
+} from 'components/utils/validateHooks/ValidateHooks';
+import PhoneMaskCustom from 'components/phoneMaskCustom/PhoneMaskCustom';
 
 import { FormContacts } from './ContactForm.styled';
-
-import TextField from '@mui/material/TextField';
-import LoadingButton from '@mui/lab/LoadingButton';
-import PhoneMaskCustom from 'components/phoneMaskCustom/PhoneMaskCustom';
 
 const initState = { name: '', number: '' };
 
 const ContactForm = () => {
   const [formValues, setFormValues] = useState(() => initState);
+  const [isNameError, nameErrorText] = useValidateName(formValues);
+  const [isPhoneError, phoneErrorText] = useValidatePhone(formValues);
+  const [isFormError, setIsFormError] = useState(false);
 
-  const { data: contacts, error: contactsError } = useGetContactsQuery();
-  const [addContact, { isLoading }] = useAddContactMutation();
+  const { data: contacts } = useGetContactsQuery();
+  const [addContact, { data: addedContact, isLoading, isSuccess, isError }] =
+    useAddContactMutation();
 
   const handleChange = event => {
     setFormValues({
@@ -36,14 +43,9 @@ const ContactForm = () => {
       );
     });
   };
-  const onSubmit = event => {
-    event.preventDefault();
-    console.log('formValues: ', formValues);
 
-    if (contactsError) {
-      toast.error(`Server not responding`);
-      return;
-    }
+  const onSubmit = async event => {
+    event.preventDefault();
 
     if (isInContacts(formValues)) {
       toast.error('This contact already exists', {
@@ -52,11 +54,28 @@ const ContactForm = () => {
       });
       return;
     }
-    const { name, number } = formValues;
-    addContact({ name, number });
-    toast.success(`Contact ${formValues.name} successfully added`);
-    setFormValues(initState);
+
+    if (isNameError || isPhoneError) {
+      setIsFormError(true);
+      return;
+    }
+
+    setIsFormError(false);
+    addContact(formValues);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(`Contact ${addedContact.name} successfully added`);
+      setFormValues(initState);
+    }
+  }, [addedContact, isSuccess]);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error('Oops, something went wrong...');
+    }
+  }, [isError]);
 
   return (
     <FormContacts onSubmit={onSubmit}>
@@ -66,12 +85,9 @@ const ContactForm = () => {
         name="name"
         value={formValues.name}
         onChange={handleChange}
-        inputProps={{
-          inputMode: 'text',
-          pattern: "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$",
-          title: 'Name may contain only letters, apostrophe, dash and spaces.',
-        }}
         variant="standard"
+        error={isFormError && isNameError}
+        helperText={isFormError && nameErrorText}
         sx={{ mb: 2 }}
         fullWidth
         required
@@ -87,6 +103,8 @@ const ContactForm = () => {
           inputComponent: PhoneMaskCustom,
         }}
         variant="standard"
+        error={isFormError && isPhoneError}
+        helperText={isFormError && phoneErrorText}
         sx={{ mb: 2 }}
         fullWidth
         required

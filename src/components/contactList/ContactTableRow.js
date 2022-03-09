@@ -10,13 +10,15 @@ const ContactTableRow = ({ id, name, number }) => {
   const [onDelete, { data, isLoading: isDeleting }] =
     useDeleteContactMutation();
 
-  console.log('data: ', data);
-
   useEffect(() => {
     if (data) {
       toast.success(`Contact successfully deleted`);
     }
   }, [data]);
+
+  const handleOnClick = () => {
+    onDelete(id);
+  };
 
   return (
     <TableRow hover role="listitem" tabIndex={-1}>
@@ -24,7 +26,7 @@ const ContactTableRow = ({ id, name, number }) => {
       <TableCell align="center">{number}</TableCell>
       <TableCell align="center">
         <LoadingButton
-          onClick={() => onDelete(id)}
+          onClick={handleOnClick}
           disabled={isDeleting}
           loading={isDeleting}
           loadingIndicator="Deleting..."

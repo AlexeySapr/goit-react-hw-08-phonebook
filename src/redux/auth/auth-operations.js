@@ -66,9 +66,9 @@ export const getCurrentUserOperation = createAsyncThunk(
     token.set(userToken);
     try {
       const response = await getUser();
-      console.log('response: ', response);
       return response.data;
     } catch (error) {
+      toast.error(`${error}`);
       console.log('getCurrentUserError: ', error);
     }
   },

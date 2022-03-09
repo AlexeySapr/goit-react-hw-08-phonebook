@@ -30,3 +30,13 @@ export const useValidatePassword = ({ password }) => {
     return [false, ''];
   }
 };
+
+export const useValidatePhone = ({ number }) => {
+  const isNumberLength = number.length < 18;
+
+  if (isNumberLength) {
+    return [true, 'Invalid phone number'];
+  } else {
+    return [false, ''];
+  }
+};
