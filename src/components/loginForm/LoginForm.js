@@ -25,7 +25,7 @@ const LoginForm = () => {
   const handleChange = event => {
     setFormValues({
       ...formValues,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value.trim(),
     });
   };
 

@@ -47,7 +47,10 @@ const ContactForm = () => {
   const onSubmit = async event => {
     event.preventDefault();
 
-    if (isInContacts(formValues)) {
+    let { name, number } = formValues;
+    name = name.trim();
+
+    if (isInContacts({ name, number })) {
       toast.error('This contact already exists', {
         duration: 5000,
         position: 'top-center',
@@ -61,7 +64,7 @@ const ContactForm = () => {
     }
 
     setIsFormError(false);
-    addContact(formValues);
+    addContact({ name, number });
   };
 
   useEffect(() => {

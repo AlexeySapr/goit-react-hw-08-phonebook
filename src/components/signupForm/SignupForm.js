@@ -24,16 +24,24 @@ const SignupForm = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const handleChange = event => {
+  const handleNameChange = event => {
     setFormValues({
       ...formValues,
       [event.target.name]: event.target.value,
     });
   };
 
+  const handleChange = event => {
+    setFormValues({
+      ...formValues,
+      [event.target.name]: event.target.value.trim(),
+    });
+  };
+
   const onSubmit = event => {
     event.preventDefault();
-    const { name, email, password } = formValues;
+    let { name, email, password } = formValues;
+
     if (isNameError || isEmailError || isPassError) {
       setIsFormError(true);
       return;
@@ -53,7 +61,7 @@ const SignupForm = () => {
           name="name"
           type="text"
           value={formValues.name}
-          onChange={handleChange}
+          onChange={handleNameChange}
           variant="standard"
           error={isFormError && isNameError}
           helperText={isFormError && nameErrorText}
