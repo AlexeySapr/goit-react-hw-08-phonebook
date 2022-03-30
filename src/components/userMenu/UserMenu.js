@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { MdOutlineLogout } from 'react-icons/md';
 import { UserName } from './UserMenu.styled';
@@ -13,9 +14,6 @@ const UserMenu = ({ emailUser }) => {
       <LoadingButton
         type="click"
         onClick={() => dispatch(authOperations.logOutOperation())}
-        // loading={isLoading}
-        // disabled={isLoading}
-        // loadingIndicator="Adding..."
         variant="outlined"
         size="small"
         endIcon={<MdOutlineLogout />}
@@ -25,6 +23,10 @@ const UserMenu = ({ emailUser }) => {
       </LoadingButton>
     </UserName>
   );
+};
+
+UserMenu.propTypes = {
+  emailUser: PropTypes.string.isRequired,
 };
 
 export default UserMenu;
