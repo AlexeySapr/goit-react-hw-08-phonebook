@@ -30,7 +30,10 @@ const App = () => {
             }
           />
 
-          <Route path="react-phonebook" element={<Navigate to="/" replace />} />
+          <Route
+            path="goit-react-hw-08-phonebook"
+            element={<Navigate to="/" replace />}
+          />
 
           <Route
             path="login"
