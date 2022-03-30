@@ -30,16 +30,10 @@ const ContactTable = ({ contacts }) => {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('');
   const [page, setPage] = useState(0);
-  // console.log('page: ', page);
-  // console.log('contacts.length: ', contacts.length);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
-    console.log('property: ', property);
-    console.log('order: ', order);
-    console.log('orderBy: ', orderBy);
-
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
@@ -49,7 +43,6 @@ const ContactTable = ({ contacts }) => {
   };
 
   const handleChangeRowsPerPage = event => {
-    console.log('eventRowsPerPage: ', event);
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -63,8 +56,6 @@ const ContactTable = ({ contacts }) => {
   useEffect(() => {
     const pageNum = Math.floor(contacts.length / rowsPerPage);
     if (page > pageNum) {
-      console.log('pageInUse: ', page);
-      console.log('pageNum: ', pageNum);
       setPage(pageNum);
     }
   }, [contacts.length, page, rowsPerPage]);
