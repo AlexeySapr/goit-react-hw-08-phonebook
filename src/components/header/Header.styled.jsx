@@ -13,6 +13,7 @@ export const TitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 `;
 
 export const HeadContainer = styled(Container)(() => ({
